@@ -8,8 +8,32 @@ class App(tk.Tk):
     gameStarted = False
 
     def play(self, bet: str):
-        print(bet)
-        self.choice.set(bet)
+        final = random.choice(bets)
+        self.choice.set(final)
+        if bet == final:
+            self.result.configure(text="Draw!")
+            return
+        elif bet == "rock":
+            if final == "paper":
+                self.result.configure(text="Loose!")
+                return
+            else:
+                self.result.configure(text="Win!")
+                return
+        elif bet == "paper":
+            if final == "scissors":
+                self.result.configure(text="Loose!")
+                return
+            else:
+                self.result.configure(text="Win!")
+                return
+        elif bet == "scissors":
+            if final == "rock":
+                self.result.configure(text="Loose!")
+                return
+            else:
+                self.result.configure(text="Win!")
+                return
 
     def rock(self):
         self.play("rock")
@@ -52,6 +76,9 @@ class App(tk.Tk):
         self.scissors = tk.Button(self.stack, text="Scissors", font=("Arial", 20), bg="white", width=5,
                                   borderwidth=3, command=self.scissors)
         self.scissors.pack(side="left", padx=10)
+
+        self.result = tk.Label(self, text="", font=("Arial", 28), fg="black", bg="#f0f0f0")
+        self.result.pack(pady=30)
 
 
 if __name__ == "__main__":
